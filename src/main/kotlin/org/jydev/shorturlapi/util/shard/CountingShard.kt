@@ -19,6 +19,12 @@ class CountingShard<K : Any, V : Any>(
     override val capacity: Int
         get() = shardHolder.size
 
+    override fun remove(key: K) {
+
+        val idx = shardStrategy.shardIdx(shardHolder, key)
+        shardHolder[idx].remove(key)
+    }
+
     override fun put(key: K, value: V) {
 
         val idx = shardStrategy.shardIdx(shardHolder, key)

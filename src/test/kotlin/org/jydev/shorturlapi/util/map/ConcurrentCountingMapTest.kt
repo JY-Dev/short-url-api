@@ -57,4 +57,16 @@ class ConcurrentCountingMapTest {
 
         assertEquals(map.entries.size, dataSize)
     }
+
+    @Test
+    fun `데이터가 삭제 되었을 때 해당 key로 조회시 null을 반환 해야한다`() {
+        val map = ConcurrentCountingMap<String, String>()
+        val key = "key"
+        val value = "value"
+        map[key] = value
+
+        map.remove(key)
+
+        assertEquals(map[key], null)
+    }
 }

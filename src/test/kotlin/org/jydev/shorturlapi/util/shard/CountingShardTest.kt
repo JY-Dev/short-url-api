@@ -29,6 +29,23 @@ class CountingShardTest {
     }
 
     @Test
+    fun `데이터를 삭제했을 때 해당 key로 조회시 null을 반환 해야한다`() {
+
+        val countingShard = CountingShard<String, Int>(
+            capacity = 5
+        )
+        val key = "key"
+        val value = 0
+        countingShard.put(key, value)
+
+        Assertions.assertEquals(countingShard.get(key), value)
+
+        countingShard.remove(key)
+
+        Assertions.assertEquals(countingShard.get(key), null)
+    }
+
+    @Test
     fun `shard를 변경할 때 기존 데이터도 유지되야 한다`() {
 
         val countingShard = CountingShard<String, Int>(

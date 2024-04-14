@@ -29,6 +29,23 @@ class DefaultShardTest {
     }
 
     @Test
+    fun `데이터를 삭제했을 때 해당 key로 조회시 null을 반환 해야한다`() {
+
+        val defaultShard = DefaultShard<String, Int>(
+            capacity = 5
+        )
+        val key = "key"
+        val value = 0
+        defaultShard.put(key, value)
+
+        Assertions.assertEquals(defaultShard.get(key), value)
+
+        defaultShard.remove(key)
+
+        Assertions.assertEquals(defaultShard.get(key), null)
+    }
+
+    @Test
     fun `shard를 변경할 때 기존 데이터도 유지되야 한다`() {
 
         val defaultShard = DefaultShard<String, Int>(
