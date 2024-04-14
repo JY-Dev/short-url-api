@@ -58,7 +58,7 @@ class CountingShard<K : Any, V : Any>(
         capacity * Integer.MAX_VALUE
 
     @Synchronized
-    fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>? = null) {
+    override fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>?) {
 
         this.shardStrategy = shardStrategy ?: this.shardStrategy
         this.shardStrategy

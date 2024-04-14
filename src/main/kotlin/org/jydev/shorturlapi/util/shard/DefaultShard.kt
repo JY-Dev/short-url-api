@@ -46,7 +46,7 @@ class DefaultShard<K : Any, V : Any>(
     }
 
     @Synchronized
-    fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>? = null) {
+    override fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>?) {
 
         this.shardStrategy = shardStrategy ?: this.shardStrategy
         this.shardStrategy
