@@ -1,6 +1,6 @@
 package org.jydev.shorturlapi.util.shard
 
-import org.jydev.shorturlapi.util.ConcurrentCountingMap
+import org.jydev.shorturlapi.util.map.ConcurrentCountingMap
 import org.jydev.shorturlapi.util.shard.strategy.DefaultShardStrategy
 import org.jydev.shorturlapi.util.shard.strategy.ShardStrategy
 

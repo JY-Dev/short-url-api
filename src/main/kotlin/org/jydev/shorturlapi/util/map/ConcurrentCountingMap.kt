@@ -1,4 +1,4 @@
-package org.jydev.shorturlapi.util
+package org.jydev.shorturlapi.util.map
 
 import java.util.concurrent.ConcurrentHashMap
 

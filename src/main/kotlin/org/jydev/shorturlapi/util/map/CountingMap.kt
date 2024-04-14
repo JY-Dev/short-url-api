@@ -1,4 +1,4 @@
-package org.jydev.shorturlapi.util
+package org.jydev.shorturlapi.util.map
 
 interface CountingMap<K : Any, V : Any> : MutableMap<K, V> {
     fun count(key: K): Long?

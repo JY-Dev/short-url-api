@@ -1,4 +1,4 @@
-package org.jydev.shorturlapi.util
+package org.jydev.shorturlapi.util.map
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
