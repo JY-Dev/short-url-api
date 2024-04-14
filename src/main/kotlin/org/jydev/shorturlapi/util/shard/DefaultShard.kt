@@ -24,7 +24,7 @@ class DefaultShard<K : Any, V : Any>(
         }
 
     override fun limitSize(): Int =
-        capacity * Integer.MAX_VALUE
+        capacity * Shard.SHARD_LIMIT_SIZE
 
     override fun remove(key: K) {
 

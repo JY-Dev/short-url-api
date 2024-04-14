@@ -55,7 +55,7 @@ class CountingShard<K : Any, V : Any>(
         }
 
     override fun limitSize(): Int =
-        capacity * Integer.MAX_VALUE
+        capacity * Shard.SHARD_LIMIT_SIZE
 
     @Synchronized
     override fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>?) {
@@ -71,5 +71,4 @@ class CountingShard<K : Any, V : Any>(
 
     private fun createMap(): ConcurrentCountingMap<K, V> =
         ConcurrentCountingMap()
-
 }

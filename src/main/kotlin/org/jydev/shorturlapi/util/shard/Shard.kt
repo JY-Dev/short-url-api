@@ -10,4 +10,8 @@ interface Shard<K : Any ,V : Any> {
     fun size() : Long
     fun limitSize() : Int
     fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>? = null)
+
+    companion object {
+        const val SHARD_LIMIT_SIZE = 100000
+    }
 }
