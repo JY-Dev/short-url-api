@@ -37,6 +37,12 @@ class CountingShard<K : Any, V : Any>(
         return shardHolder[idx].count(key)
     }
 
+    fun resetCount(key : K)  {
+
+        val idx = shardStrategy.shardIdx(shardHolder, key)
+        return shardHolder[idx].resetCount(key)
+    }
+
     @Synchronized
     fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>? = null) {
 

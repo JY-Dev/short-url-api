@@ -54,6 +54,12 @@ class ConcurrentCountingMap<K : Any, V : Any> : CountingMap<K, V> {
     override fun isEmpty(): Boolean =
         this.concurrentHashMap.isEmpty()
 
+    fun resetCount(key : K) {
+        this.concurrentHashMap.computeIfPresent(key) { _, v ->
+            CountingData(v.data, 0)
+        }?.data
+    }
+
     override fun replace(key: K, value: V): Nothing =
         throw UnsupportedOperationException("지원하지 않는 메서드 입니다.")
 
