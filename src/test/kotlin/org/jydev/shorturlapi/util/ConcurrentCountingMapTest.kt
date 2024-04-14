@@ -2,12 +2,13 @@ package org.jydev.shorturlapi.util
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import java.util.UUID
 import kotlin.concurrent.thread
 
 class ConcurrentCountingMapTest {
 
     @Test
-    fun `데이터를 넣었을 때 Key에 대한 값이 정상적으로 반환되야한다`( ) {
+    fun `데이터를 넣었을 때 Key에 대한 값이 정상적으로 반환되야한다`() {
         val map = ConcurrentCountingMap<String, String>()
         val key = "test-key"
         val value = "test-value"
@@ -41,5 +42,19 @@ class ConcurrentCountingMapTest {
 
         assertEquals(numberOfThreads * iterationsPerThread, map.count(key)?.toInt())
 
+    }
+
+    @Test
+    fun `데이터를 넣었을 때 넣은 데이터에 대한 Entry의 목록이 반환되어야 한다`() {
+        val map = ConcurrentCountingMap<String, Int>()
+        val dataSize = 500
+
+        repeat(dataSize) { value ->
+
+            val key = UUID.randomUUID().toString()
+            map[key] = value
+        }
+
+        assertEquals(map.entries.size, dataSize)
     }
 }

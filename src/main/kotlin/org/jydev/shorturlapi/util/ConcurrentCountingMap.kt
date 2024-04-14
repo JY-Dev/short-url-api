@@ -6,13 +6,14 @@ class ConcurrentCountingMap<K : Any, V : Any> : CountingMap<K, V> {
 
     private val concurrentHashMap = ConcurrentHashMap<K, CountingData<V>>()
 
-    override val entries = mutableMapOf<K, V>().apply {
-
+    private fun getMapEntries() = mutableMapOf<K,V>().apply {
         concurrentHashMap.entries
             .map { it.key to it.value.data }
             .also(this::putAll)
-
     }.entries
+
+    override val entries
+        get() = getMapEntries()
 
     override val keys: MutableSet<K> = this.concurrentHashMap.keys
     override val size: Int
@@ -32,10 +33,9 @@ class ConcurrentCountingMap<K : Any, V : Any> : CountingMap<K, V> {
         return this.concurrentHashMap.remove(key) != null
     }
 
-    override fun put(key: K, value: V): V = CountingData(value, 0).let { countingData ->
+    override fun put(key: K, value: V): V = CountingData(value, 0).also { countingData ->
         this.concurrentHashMap[key] = countingData
-        countingData.data
-    }
+    }.data
 
     override fun count(key: K): Long? =
         this.concurrentHashMap[key]?.count
