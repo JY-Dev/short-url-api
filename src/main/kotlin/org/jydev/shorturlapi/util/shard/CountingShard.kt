@@ -49,6 +49,14 @@ class CountingShard<K : Any, V : Any>(
         return shardHolder[idx].resetCount(key)
     }
 
+    override fun size(): Long =
+        this.shardHolder.sumOf {
+            it.size.toLong()
+        }
+
+    override fun limitSize(): Int =
+        capacity * Integer.MAX_VALUE
+
     @Synchronized
     fun changeShard(changeCapacity: Int, shardStrategy: ShardStrategy<K, V>? = null) {
 

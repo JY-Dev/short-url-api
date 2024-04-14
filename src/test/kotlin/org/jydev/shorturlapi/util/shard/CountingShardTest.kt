@@ -46,6 +46,25 @@ class CountingShardTest {
     }
 
     @Test
+    fun `데이터를 넣은 갯수 만큼 size 함수에서 반환 해야한다`() {
+
+        val capacity = 5
+        val countingShard = CountingShard<String, Int>(
+            capacity = capacity
+        )
+        val dataSize = 500
+        val data = mutableListOf<Pair<String, Int>>()
+        repeat(dataSize) { cnt ->
+            val key = UUID.randomUUID().toString()
+            data.add(key to cnt)
+            countingShard.put(key = key, value = cnt)
+        }
+
+        Assertions.assertEquals(countingShard.size(), dataSize.toLong())
+    }
+
+
+    @Test
     fun `shard를 변경할 때 기존 데이터도 유지되야 한다`() {
 
         val countingShard = CountingShard<String, Int>(

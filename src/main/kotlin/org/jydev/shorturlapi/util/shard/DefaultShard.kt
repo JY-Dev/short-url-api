@@ -18,6 +18,14 @@ class DefaultShard<K : Any, V : Any>(
     override val capacity: Int
         get() = shardHolder.size
 
+    override fun size(): Long =
+        this.shardHolder.sumOf {
+            it.size.toLong()
+        }
+
+    override fun limitSize(): Int =
+        capacity * Integer.MAX_VALUE
+
     override fun remove(key: K) {
 
         val idx = shardStrategy.shardIdx(shardHolder, key)
