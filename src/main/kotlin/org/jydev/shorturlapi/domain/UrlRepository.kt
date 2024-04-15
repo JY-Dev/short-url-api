@@ -1,4 +1,4 @@
-package org.jydev.shorturlapi.domain.url
+package org.jydev.shorturlapi.domain
 
 interface UrlRepository {
     fun getUrl(key : String) : String?

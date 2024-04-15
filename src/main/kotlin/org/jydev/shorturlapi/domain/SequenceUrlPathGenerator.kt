@@ -1,4 +1,4 @@
-package org.jydev.shorturlapi.domain.url
+package org.jydev.shorturlapi.domain
 
 class SequenceUrlPathGenerator {
 

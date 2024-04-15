@@ -1,8 +1,8 @@
 package org.jydev.shorturlapi.infra
 
 import jakarta.annotation.PostConstruct
-import org.jydev.shorturlapi.domain.url.UrlRepository
-import org.jydev.shorturlapi.domain.url.UrlViewCountRepository
+import org.jydev.shorturlapi.domain.UrlRepository
+import org.jydev.shorturlapi.domain.UrlViewCountRepository
 import org.jydev.shorturlapi.util.shard.CountingShard
 import org.jydev.shorturlapi.util.shard.checkingAndReBalanceShard
 import org.springframework.stereotype.Repository
