@@ -1,0 +1,8 @@
+
+### Short Url 생성
+POST http://localhost:8080/api/short-url
+Content-Type: application/json
+
+{
+  "url": "https://naver.com"
+}

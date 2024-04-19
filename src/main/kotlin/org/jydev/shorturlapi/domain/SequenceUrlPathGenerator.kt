@@ -1,5 +1,8 @@
 package org.jydev.shorturlapi.domain
 
+import org.springframework.stereotype.Component
+
+@Component
 class SequenceUrlPathGenerator {
 
     private val chars = ('a'..'z') + ('A'..'Z')
