@@ -44,7 +44,7 @@ class ShortUrlApiControllerTest {
         val response = GenerateShortUrlResponse("$baseUrl/short-url/$shortUrlPath")
 
         mockMvc.perform(
-            post("/short-url")
+            post("/api/short-url")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
         )
