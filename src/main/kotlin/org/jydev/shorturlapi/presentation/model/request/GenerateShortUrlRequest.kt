@@ -1,8 +1,8 @@
 package org.jydev.shorturlapi.presentation.model.request
 
-import jakarta.validation.constraints.Pattern
+import org.jydev.shorturlapi.presentation.model.validation.AllowUrlConstraint
 
 data class GenerateShortUrlRequest(
-    @get:Pattern(regexp = "^https?://(www\\.)?[a-zA-Z0-9\\-.]+\\.[a-zA-Z]{2,}(/\\S*)?\$", message = "Invalid URL format")
-    val url : String
+    @field:AllowUrlConstraint
+    val url: String
 )

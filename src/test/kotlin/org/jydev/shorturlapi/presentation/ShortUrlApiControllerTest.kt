@@ -57,11 +57,27 @@ class ShortUrlApiControllerTest {
     @Test
     fun `유효하지 않은 URL 형식`() {
         val invalidUrl = "http://example"
-
+        val baseUrl = "http://sho.rt"
         val request = GenerateShortUrlRequest(invalidUrl)
 
+        Mockito.`when`(baseProperties.url).thenReturn(baseUrl)
+
         mockMvc.perform(
-            post("/short-url")
+            post("/api/short-url")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))
+        ).andExpect(status().isBadRequest)
+    }
+
+    @Test
+    fun `입력으로 받은 URL이 BaseUrl이랑 같은 경우 요청에 실패 해야한다`() {
+        val baseUrl = "http://sho.rt"
+        val request = GenerateShortUrlRequest(baseUrl)
+
+        Mockito.`when`(baseProperties.url).thenReturn(baseUrl)
+
+        mockMvc.perform(
+            post("/api/short-url")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
         ).andExpect(status().isBadRequest)
