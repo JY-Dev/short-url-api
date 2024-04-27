@@ -5,9 +5,7 @@ import org.jydev.shorturlapi.app.GenerateShortUrlUseCase
 import org.jydev.shorturlapi.presentation.model.request.GenerateShortUrlRequest
 import org.jydev.shorturlapi.presentation.model.response.GenerateShortUrlResponse
 import org.jydev.shorturlapi.presentation.property.BaseProperties
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class ShortUrlApiController(
@@ -17,15 +15,18 @@ class ShortUrlApiController(
     @PostMapping("/api/short-url")
     fun generateShortUrl(@RequestBody @Valid request: GenerateShortUrlRequest): GenerateShortUrlResponse {
 
-        val cleanUrl = removeQueryParameters(request.url)
-        val shortUrlPath = generateShortUrlUseCase.invoke(cleanUrl)
+        val cleanUrl = request.url.removeQueryParameters()
+        val shortUrlPath = generateShortUrlUseCase.invoke(url = cleanUrl)
 
-        val shortUrl = "${baseProperties.url}/short-url/$shortUrlPath"
+        val shortUrl = "${baseProperties.url}/$SHORT_URL_BASE/$shortUrlPath"
 
-        return GenerateShortUrlResponse(shortUrl)
+        return GenerateShortUrlResponse(url = shortUrl)
     }
 
-    private fun removeQueryParameters(url: String): String {
-        return url.substringBefore('?')
+    private fun String.removeQueryParameters(): String =
+        this.substringBefore('?')
+
+    companion object {
+        const val SHORT_URL_BASE = "short-url"
     }
 }
