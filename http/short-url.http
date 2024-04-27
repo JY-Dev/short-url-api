@@ -6,3 +6,6 @@ Content-Type: application/json
 {
   "url": "https://naver.com"
 }
+
+### Short Url 조회수 조회
+GET http://localhost:8080/api/short-url/{shortUrlPath}/view-coun
